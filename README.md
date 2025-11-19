@@ -23,35 +23,56 @@ It is simple, fast, and fully accessible via the terminal.
 
 - Python 3.12.3
 - MySQL server installed and functional
-- MySQL connector
+- mysql-connector-python (Python package)
 
 ## How to Run
 
 ### Clone or download the project folder
 ```
 git clone https://github.com/kellen-mutoni/Privacy_Ascent.git
+cd Privacy_Ascent
 ```
+
+### Ensure MySQL Server Is Running
+Before running database.py, confirm that your MySQL server is actually running. If MySQL is stopped, the script will fail with connection errors.
+
+#### Linux/Mac:
+```
+sudo service mysql status
+```
+
+If it's not active, run: 
+```
+sudo service mysql start
+```
+
+#### Windows:
+1. Press Win + R, type services.msc
+2. Find MySQL or MySQL80
+3. Make sure the status is Running
+4. Start it if necessary
 
 ### Create the Project User
 
-You have to create the MySQL login user that your script expects, by running the command below:
-
+Log in as root and create the expected user:
 ```
+mysql -u root -p
+# Enter password to root MySQL
 CREATE USER 'health'@'localhost' IDENTIFIED BY 'Private123!';
-GRANT ALL PRIVILEGES ON privacy_ascent.* TO 'health'@'localhost';
 FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON privacy_ascent.* TO 'health'@'localhost';
 ``` 
 ### Create the Project Database
 
-Run the database.py script **once** to create the database and all required tables on your MySQL server:
+Run the `database.py` script **once** to create the `privacy_ascent` database and all required tables on your MySQL server:
 ```
 python3 database.py  # Linux / Mac
 python database.py   # Windows
 ```
+*Running it again will throw errors because tables already exist.*
 
 ## Run the Application
 ```
 python3 main.py  # Linux / Mac
 python main.py   # Windows
 ```
-

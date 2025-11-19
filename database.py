@@ -1,6 +1,7 @@
 # RUN ONCE
 import mysql.connector
 
+
 def create_database():
         # Connect to MySQL server (adjust user/password as needed)
         conn = mysql.connector.connect(

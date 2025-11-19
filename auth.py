@@ -19,9 +19,11 @@ def register(username, password, age=None, gender=None):
             (username, password, age, gender)
         )
         conn.commit()
-        print("Registration successful!")
+        print("----- Registration successful! -----\n")
+        return login(username, password)
     except mysql.connector.IntegrityError:
-        print("Username already exists!")
+        print("----- Username already exists! -----")
+        return None
 
 # ---- Login function ----
 def login(username, password):
@@ -31,13 +33,13 @@ def login(username, password):
     )
     user = cursor.fetchone()
     if user:
-        print(f"Login successful! Welcome, {user['username']}")
-        return True
-    print("Invalid username or password.")
-    return False
+        print(f"----- Login successful! Welcome, {user['username']} -----")
+        return user
+    print("----- Invalid username or password! -----")
+    return None
 
 # ---- Login Menu Logic ----
-if __name__ == "__main__":
+def auth():
     while True:
         action = input("Do you have an account? [Yes/No/exit]? ").strip().lower()
         if action == "no":
@@ -48,14 +50,14 @@ if __name__ == "__main__":
             gender = input("Gender (optional): ").strip()
             age = int(age) if age.isdigit() else None
             gender = gender if gender else None
-            register(uname, pwd, age, gender)
+            return register(uname, pwd, age, gender)
         elif action == "yes":
             print("\n----- Enter your Details to Sign in -----\n")
             uname = input("Username: ").strip()
             pwd = input("Password: ").strip()
-            login(uname, pwd)
+            return login(uname, pwd)
         elif action == "exit":
             break
         else:
-            print("Unknown command")
-
+            print("Unknown command!\n")
+            print("Please Try Again!\n\n")
