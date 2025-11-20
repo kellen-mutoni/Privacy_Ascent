@@ -54,10 +54,13 @@ sudo service mysql start
 
 ### Create the Project User
 
-Log in as root and create the expected user:
+1. Log in as root:
 ```
-mysql -u root -p
-# Enter password to root MySQL
+mysql -u root -p  # Enter password to root MySQL
+```
+
+2. Create the expected user:
+```
 CREATE USER 'health'@'localhost' IDENTIFIED BY 'Private123!';
 FLUSH PRIVILEGES;
 GRANT ALL PRIVILEGES ON privacy_ascent.* TO 'health'@'localhost';
@@ -71,7 +74,19 @@ python database.py   # Windows
 ```
 *Running it again will throw errors because tables already exist.*
 
-## Run the Application
+### Check MySQL connector
+
+1. Install MySQL connector:
+```
+pip install mysql-connector-python
+```
+
+2. Verify installation:
+```
+pip show mysql-connector-python
+```
+
+### Run the Application
 ```
 python3 main.py  # Linux / Mac
 python main.py   # Windows
