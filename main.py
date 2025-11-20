@@ -89,7 +89,7 @@ def main():
             user = auth()
             if user:
                 logged_in = True
-                main_menu(user['username'], user['id'])
+                main_menu(user['username'], user['user_id'])
         elif choice == "2":
             guest_menu()
         elif choice == "3":
