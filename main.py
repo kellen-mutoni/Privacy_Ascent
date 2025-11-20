@@ -16,7 +16,7 @@ def welcome_screen():
 def main_menu(username, user_id):
     """Main menu displayed after successful login."""
     while True:
-        print("\n" *10)
+        print("\n" *2)
         print(f"MAIN MENU - Welcome, {username}!")
         print("\n1. Mood Tracker")
         print("2. Mental Health Resources")
